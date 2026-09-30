@@ -214,7 +214,9 @@ def collect_from_remote(key):
 # ---------------------------------------------------------------- EPG id 映射
 # 2026-09-30 端侧接通 EPG：表头加 x-tvg-url（fanmingming 公网 XMLTV，7.7MB/覆盖今明），
 # 每台加 tvg-id（与 EPG 的 channel id 同一归一化规则，端侧 EpgIndex 按它查节目单）。
-EPG_URL = "https://raw.githubusercontent.com/fanmingming/live/main/e.xml"
+# 地址走 jsDelivr CDN：盒子直连 raw.githubusercontent 实测超时（SocketTimeout），
+# 而 jsDelivr 在同机取直播表一直成功；EPG 数据是"今天/明天"，分支缓存 12h 不影响时效。
+EPG_URL = "https://cdn.jsdelivr.net/gh/fanmingming/live@main/e.xml"
 
 
 def epg_id(name):
