@@ -211,9 +211,24 @@ def collect_from_remote(key):
     return by_key
 
 
+# ---------------------------------------------------------------- EPG id 映射
+# 2026-09-30 端侧接通 EPG：表头加 x-tvg-url（fanmingming 公网 XMLTV，7.7MB/覆盖今明），
+# 每台加 tvg-id（与 EPG 的 channel id 同一归一化规则，端侧 EpgIndex 按它查节目单）。
+EPG_URL = "https://raw.githubusercontent.com/fanmingming/live/main/e.xml"
+
+
+def epg_id(name):
+    """与 fanmingming EPG 的 channel id 对齐：'CCTV-1 综合'→'CCTV1'，'CCTV-5+ 体育赛事'→'CCTV5+'，'湖南卫视'→'湖南卫视'。"""
+    first = name.strip().split(" ")[0]
+    up = first.upper()
+    if up.startswith("CCTV") or up.startswith("CGTN") or up.startswith("CETV") or up.startswith("CHC"):
+        return first.replace("-", "").replace("－", "").upper()
+    return name.replace(" ", "").replace("-", "").replace("－", "")
+
+
 # ---------------------------------------------------------------- 出表
 def build(roster, srcmap):
-    lines = ["#EXTM3U"]
+    lines = ["#EXTM3U x-tvg-url=\"%s\"" % EPG_URL]
     hit, miss = 0, []
     for r in roster:
         chno = int(r["chno"])
@@ -227,8 +242,8 @@ def build(roster, srcmap):
         hit += 1
         for i, u in enumerate(urls):
             nm = name if i == 0 else "%s·备%d" % (name, i)
-            lines.append('#EXTINF:-1 tvg-chno="%d" tvg-name="%s" tvg-logo="%s%04d.png" '
-                         'group-title="%s",%s' % (chno, name, LOGO_BASE, chno, group, nm))
+            lines.append('#EXTINF:-1 tvg-chno="%d" tvg-id="%s" tvg-name="%s" tvg-logo="%s%04d.png" '
+                         'group-title="%s",%s' % (chno, epg_id(name), name, LOGO_BASE, chno, group, nm))
             lines.append(u)
     return "\n".join(lines) + "\n", hit, miss
 
