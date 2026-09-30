@@ -229,7 +229,6 @@ def build(roster, srcmap):
             nm = name if i == 0 else "%s·备%d" % (name, i)
             lines.append('#EXTINF:-1 tvg-chno="%d" tvg-name="%s" tvg-logo="%s%04d.png" '
                          'group-title="%s",%s' % (chno, name, LOGO_BASE, chno, group, nm))
-        for u in urls:
             lines.append(u)
     return "\n".join(lines) + "\n", hit, miss
 
