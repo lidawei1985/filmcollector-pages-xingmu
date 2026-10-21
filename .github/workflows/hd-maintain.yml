@@ -1,0 +1,43 @@
+name: hd-maintain
+
+# 央视高清源自动保活：每 30 分钟测活一次，把可用 1080p 线路写入
+# v1/live/hd_sources.json，App 启动时会自动拉这个文件（无需重新打包安装）。
+# 纯公网运行，不依赖任何本机/局域网设备。
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  maintain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 安装 ffprobe
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg curl
+
+      - name: 测活并生成 hd_sources.json
+        run: |
+          mkdir -p v1/live
+          python3 hd_maintain.py --out v1/live/hd_sources.json || true
+          cat v1/live/hd_sources.json | head -20
+
+      - name: 提交变更
+        run: |
+          git config user.name  "hd-maintain-bot"
+          git config user.email "hd-maintain@users.noreply.github.com"
+          git add v1/live/hd_sources.json
+          if git diff --cached --quiet; then
+            echo "无变化，跳过提交"
+          else
+            git commit -m "hd: 自动保活更新 $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git push
+          fi
