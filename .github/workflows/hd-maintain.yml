@@ -1,8 +1,12 @@
 name: hd-maintain
 
-# 央视高清源自动保活：每 30 分钟测活一次，把可用 1080p 线路写入
-# v1/live/hd_sources.json，App 启动时会自动拉这个文件（无需重新打包安装）。
-# 纯公网运行，不依赖任何本机/局域网设备。
+# 央视高清源保活 · 分发与守夜（纯公网，不依赖本机/局域网）
+#
+# 重要：**可用性探测必须在国内网络做**（源是给中国联通家用宽带用的）。
+# 阿里云（国内）跑 hd_maintain.py 生成 hd_sources.json；
+# GitHub Actions 在海外，探到的"可用"线路对家里没参考价值，所以这里**只做两件事**：
+#   1) 把阿里云 OTA 上最新的 hd_sources.json 同步到仓库（多一份公网副本，jsDelivr 可读）
+#   2) 阿里云超过 6 小时没更新 → 让任务失败（GitHub 会发失败通知，等于告警）
 
 on:
   schedule:
@@ -13,31 +17,66 @@ permissions:
   contents: write
 
 jobs:
-  maintain:
+  sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
 
-      - name: 安装 ffprobe
+      - name: 拉取阿里云最新清单
+        id: pull
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg curl
+          set -e
+          OTA="http://120.26.233.93/ota/hd_sources.json"
+          code=$(curl -s -o /tmp/ota.json -w '%{http_code}' --max-time 15 "$OTA" || echo 000)
+          echo "ota_http=$code"
+          if [ "$code" != "200" ]; then
+            echo "阿里云不可达（HTTP $code）——保留仓库现有清单，不做覆盖。"
+            echo "ok=0" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          python3 - <<'PY'
+          import json,sys
+          d=json.load(open('/tmp/ota.json'))
+          ch=d.get('ch') or {}
+          assert len(ch)>=10, f"清单频道数异常: {len(ch)}"
+          print("云端频道数", len(ch), "更新于", d.get('updatedAtText'))
+          PY
+          cp /tmp/ota.json /tmp/new.json
+          echo "ok=1" >> $GITHUB_OUTPUT
 
-      - name: 测活并生成 hd_sources.json
+      - name: 新鲜度检查（超 6 小时未更新则告警）
+        if: steps.pull.outputs.ok == '1'
         run: |
-          mkdir -p v1/live
-          python3 hd_maintain.py --out v1/live/hd_sources.json || true
-          cat v1/live/hd_sources.json | head -20
+          python3 - <<'PY'
+          import json,time,sys,os
+          d=json.load(open('/tmp/new.json'))
+          age=(time.time()-float(d.get('updatedAt',0)))/3600
+          print(f"清单年龄 {age:.1f} 小时")
+          if age>6:
+              print("::error::阿里云清单超过 6 小时未更新，国内保活任务可能已停")
+          # 仓库里的旧清单拿来对比
+          old={}
+          try: old=json.load(open('v1/live/hd_sources.json'))
+          except Exception: pass
+          if old.get('updatedAt')==d.get('updatedAt'):
+              open('/tmp/same','w').write('1')
+          else:
+              open('/tmp/same','w').write('0')
+          print("是否需要提交:", open('/tmp/same').read())
+          PY
 
-      - name: 提交变更
+      - name: 提交同步结果
+        if: steps.pull.outputs.ok == '1'
         run: |
-          git config user.name  "hd-maintain-bot"
-          git config user.email "hd-maintain@users.noreply.github.com"
-          git add v1/live/hd_sources.json
-          if git diff --cached --quiet; then
-            echo "无变化，跳过提交"
-          else
-            git commit -m "hd: 自动保活更新 $(date -u '+%Y-%m-%d %H:%M UTC')"
+          if [ -f /tmp/same ] && [ "$(cat /tmp/same)" = "0" ]; then
+            mkdir -p v1/live
+            cp /tmp/new.json v1/live/hd_sources.json
+            git config user.name  "hd-maintain-bot"
+            git config user.email "hd-maintain@users.noreply.github.com"
+            git add v1/live/hd_sources.json
+            git commit -m "hd: 同步阿里云清单 $(date -u '+%Y-%m-%d %H:%M UTC')"
             git push
+          else
+            echo "内容未变化，跳过提交"
           fi
