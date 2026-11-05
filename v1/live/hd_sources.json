@@ -1,6 +1,6 @@
 {
- "updatedAt": 1793892785,
- "updatedAtText": "2026-11-05 23:33:05",
+ "updatedAt": 1793914332,
+ "updatedAtText": "2026-11-06 05:32:12",
  "generator": "hd_maintain.py",
  "ch": {
   "1": [
@@ -29,8 +29,8 @@
    "http://112.92.129.95:9898/hls/22/index.m3u8"
   ],
   "6": [
-   "http://112.92.129.95:9898/hls/23/index.m3u8",
    "http://183.129.255.66:8480/hls/6/index.m3u8",
+   "http://112.92.129.95:9898/hls/23/index.m3u8",
    "http://cssbyd.imwork.net:8082/hls/6/index.m3u8"
   ],
   "7": [
@@ -55,13 +55,13 @@
   ],
   "11": [
    "http://183.129.255.66:8480/hls/11/index.m3u8",
-   "http://112.92.129.95:9898/hls/28/index.m3u8",
-   "http://183.129.255.66:8480/hls/11/index.m3u8"
+   "http://183.129.255.66:8480/hls/11/index.m3u8",
+   "http://112.92.129.95:9898/hls/28/index.m3u8"
   ],
   "12": [
+   "http://183.129.255.66:8480/hls/12/index.m3u8",
    "http://112.92.129.95:9898/hls/29/index.m3u8",
-   "http://112.92.129.95:9898/hls/29/index.m3u8",
-   "http://183.129.255.66:8480/hls/12/index.m3u8"
+   "http://112.92.129.95:9898/hls/29/index.m3u8"
   ],
   "13": [
    "http://183.129.255.66:8480/hls/13/index.m3u8",
@@ -70,23 +70,23 @@
   ],
   "14": [
    "http://183.129.255.66:8480/hls/14/index.m3u8",
-   "http://112.92.129.95:9898/hls/31/index.m3u8",
-   "http://183.129.255.66:8480/hls/14/index.m3u8"
+   "http://183.129.255.66:8480/hls/14/index.m3u8",
+   "http://112.92.129.95:9898/hls/31/index.m3u8"
   ],
   "15": [
-   "http://183.129.255.66:8480/hls/15/index.m3u8",
    "http://112.92.129.95:9898/hls/32/index.m3u8",
+   "http://183.129.255.66:8480/hls/15/index.m3u8",
    "http://61.136.172.236:9901/tsfile/live/0014_1.m3u8?key=txiptv&playlive=1&authid=0"
   ],
   "16": [
    "http://183.129.255.66:8480/hls/16/index.m3u8",
-   "http://112.92.129.95:9898/hls/33/index.m3u8",
-   "http://183.129.255.66:8480/hls/16/index.m3u8"
+   "http://183.129.255.66:8480/hls/16/index.m3u8",
+   "http://112.92.129.95:9898/hls/33/index.m3u8"
   ],
   "17": [
    "http://183.129.255.66:8480/hls/17/index.m3u8",
-   "http://112.92.129.95:9898/hls/34/index.m3u8",
-   "http://112.92.129.95:9898/hls/127/index.m3u8"
+   "http://183.129.255.66:8480/hls/17/index.m3u8",
+   "http://112.92.129.95:9898/hls/34/index.m3u8"
   ]
  }
 }
