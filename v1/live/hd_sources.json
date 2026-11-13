@@ -1,6 +1,6 @@
 {
- "updatedAt": 1794589399,
- "updatedAtText": "2026-11-14 01:03:19",
+ "updatedAt": 1794609158,
+ "updatedAtText": "2026-11-14 06:32:38",
  "generator": "hd_maintain.py",
  "ch": {
   "1": [
@@ -19,8 +19,8 @@
    "http://183.129.255.66:8480/hls/3/index.m3u8"
   ],
   "4": [
-   "http://183.129.255.66:8480/hls/4/index.m3u8",
    "http://112.92.129.95:9898/hls/21/index.m3u8",
+   "http://36.110.54.118:866/hls/4/index.m3u8",
    "http://112.92.129.95:9898/hls/21/index.m3u8"
   ],
   "5": [
@@ -39,14 +39,14 @@
    "http://183.129.255.66:8480/hls/7/index.m3u8"
   ],
   "8": [
-   "http://183.129.255.66:8480/hls/8/index.m3u8",
    "http://112.92.129.95:9898/hls/25/index.m3u8",
-   "http://112.92.129.95:9898/hls/25/index.m3u8"
+   "http://112.92.129.95:9898/hls/25/index.m3u8",
+   "http://183.129.255.66:8480/hls/8/index.m3u8"
   ],
   "9": [
-   "http://183.129.255.66:8480/hls/9/index.m3u8",
    "http://112.92.129.95:9898/hls/26/index.m3u8",
-   "http://112.92.129.95:9898/hls/26/index.m3u8"
+   "http://112.92.129.95:9898/hls/26/index.m3u8",
+   "http://183.129.255.66:8480/hls/9/index.m3u8"
   ],
   "10": [
    "http://112.92.129.95:9898/hls/27/index.m3u8",
@@ -56,7 +56,7 @@
   "11": [
    "http://112.92.129.95:9898/hls/28/index.m3u8",
    "http://183.129.255.66:8480/hls/11/index.m3u8",
-   "http://183.129.255.66:8480/hls/11/index.m3u8"
+   "http://59.39.89.130:60901/tsfile/live/0010_1.m3u8?key=txiptv&playlive=1&authid=0"
   ],
   "12": [
    "http://112.92.129.95:9898/hls/29/index.m3u8",
