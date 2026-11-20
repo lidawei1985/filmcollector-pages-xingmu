@@ -1,12 +1,12 @@
 {
- "updatedAt": 1795136550,
- "updatedAtText": "2026-11-20 09:02:30",
+ "updatedAt": 1795165429,
+ "updatedAtText": "2026-11-20 17:03:49",
  "generator": "hd_maintain.py",
  "ch": {
   "1": [
+   "http://183.129.255.66:8480/hls/1/index.m3u8",
    "http://112.92.129.95:9898/hls/18/index.m3u8",
-   "http://112.92.129.95:9898/hls/18/index.m3u8",
-   "http://183.129.255.66:8480/hls/1/index.m3u8"
+   "http://112.92.129.95:9898/hls/18/index.m3u8"
   ],
   "2": [
    "http://112.92.129.95:9898/hls/19/index.m3u8",
@@ -21,32 +21,32 @@
   "4": [
    "http://112.92.129.95:9898/hls/21/index.m3u8",
    "http://112.92.129.95:9898/hls/21/index.m3u8",
-   "http://36.110.54.118:866/hls/4/index.m3u8"
+   "http://183.129.255.66:8480/hls/4/index.m3u8"
   ],
   "5": [
    "http://112.92.129.95:9898/hls/22/index.m3u8",
    "http://112.92.129.95:9898/hls/22/index.m3u8",
-   "http://36.110.54.118:866/hls/5/index.m3u8"
+   "http://183.129.255.66:8480/hls/5/index.m3u8"
   ],
   "6": [
    "http://112.92.129.95:9898/hls/23/index.m3u8",
-   "http://36.110.54.118:866/hls/6/index.m3u8",
+   "http://183.129.255.66:8480/hls/6/index.m3u8",
    "http://183.129.255.66:8480/hls/6/index.m3u8"
   ],
   "7": [
+   "http://183.129.255.66:8480/hls/7/index.m3u8",
    "http://112.92.129.95:9898/hls/24/index.m3u8",
-   "http://112.92.129.95:9898/hls/24/index.m3u8",
-   "http://183.129.255.66:8480/hls/7/index.m3u8"
+   "http://112.92.129.95:9898/hls/24/index.m3u8"
   ],
   "8": [
-   "http://36.110.54.118:866/hls/8/index.m3u8",
    "http://112.92.129.95:9898/hls/25/index.m3u8",
-   "http://112.92.129.95:9898/hls/25/index.m3u8"
+   "http://112.92.129.95:9898/hls/25/index.m3u8",
+   "http://183.129.255.66:8480/hls/8/index.m3u8"
   ],
   "9": [
    "http://112.92.129.95:9898/hls/26/index.m3u8",
-   "http://36.110.54.118:866/hls/9/index.m3u8",
-   "http://183.129.255.66:8480/hls/9/index.m3u8"
+   "http://183.129.255.66:8480/hls/9/index.m3u8",
+   "http://36.110.54.118:866/hls/8/index.m3u8"
   ],
   "10": [
    "http://112.92.129.95:9898/hls/27/index.m3u8",
@@ -66,11 +66,11 @@
   "13": [
    "http://112.92.129.95:9898/hls/30/index.m3u8",
    "http://112.92.129.95:9898/hls/30/index.m3u8",
-   "http://36.110.54.118:866/hls/11/index.m3u8"
+   "http://183.129.255.66:8480/hls/13/index.m3u8"
   ],
   "14": [
    "http://ali-m-l.cztv.com/channels/lantian/channel21/1080p.m3u8",
-   "http://183.129.255.66:8480/hls/14/index.m3u8",
+   "http://112.92.129.95:9898/hls/31/index.m3u8",
    "http://112.92.129.95:9898/hls/31/index.m3u8"
   ],
   "15": [
@@ -84,9 +84,9 @@
    "http://183.129.255.66:8480/hls/16/index.m3u8"
   ],
   "17": [
-   "http://183.129.255.66:8480/hls/17/index.m3u8",
+   "http://112.92.129.95:9898/hls/127/index.m3u8",
    "http://112.92.129.95:9898/hls/34/index.m3u8",
-   "http://112.92.129.95:9898/hls/127/index.m3u8"
+   "http://183.129.255.66:8480/hls/17/index.m3u8"
   ]
  }
 }
